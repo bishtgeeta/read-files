@@ -1,58 +1,59 @@
+import numpy as np
 import imageio
 import os
-from os.path import join, exists
+from os.path import join, exists, isfile
+
+def save_npy(path, array):
+	np.save(path, array)
 
 
-def readAvi(input_path, output_path, first_frame=None, last_frame=None):
-    
-    reader = imageio.get_reader(input_path)
-    for i, img in enumerate(reader):
-        imageio.imwrite(
-    
-
-def readAVI(inputPath, outputPath=None, firstFrame=None, lastFrame=None):
-
-    reader = imageio.get_reader(inputPath)
-    col, row = reader.get_meta_data()['size']
-
-    if firstFrame is None:
-        firstFrame = 0
-    if lastFrame is None:
-        lastFrame = reader.get_meta_data()['nframes'] - 1
-    
-    if outputPath is not None:    
-        metadataFile = open(join(outputPath, 'metadata.txt'))
-        ## TODO - write metadata
-        
-        metadataFile.close()
-    
-    numFrames = lastFrame - firstFrame
-    gImgRawStack = numpy.zeros([row,col,numFrames],dtype='uint8')
-    for i, img in enumerate(reader):
+def readFromImageGenerator(imageGenerator, outputPath=None, 
+								firstFrame=0, lastFrame=np.inf):
+	
+	gImgRawStack = []
+    for i, img in enumerate(imageGenerator):
         if i < firstFrame or i > lastFrame:
             continue
-        
         imageNum = i - firstFrame
-        gImgRawStack[:,:,imageNum] = img[:,:,0]
-        if output_path is not None:
-            fname_to_write = join(output_path, '{0}.png'.format(i))
-            imageio.imwrite(fname_to_write, img[:,:,0])
-            
-    reader.close()
-    return gImgRawStack,row,col,numFrames
+        gImgRawStack.append(img[:,:,0].astype(np.uint8))
+    gImgRawStack = np.array(gImgRawStack)
+    numFrames = gImgRawStack.shape[2]
+    if outputPath is not None:
+		save_npy(outputPath, gImgRawStack)
+		
+	return gImgRawStack, numFrames
 
-input_dir = r"F:\Python\EMImagingMPI-master"
-input_file = r"F:\Python\EMImagingMPI-master\38-crop.avi"
+def readAVI(inputPath, outputPath=None, firstFrame=0, lastFrame=np.inf):
+	
+	# TODO: check input and output paths
+    aviReader = imageio.get_reader(inputPath)
+    col, row = aviReader.get_meta_data()['size']
 
-output_file = join(input_dir, 'output.mp4')
-
-readAVI('alana', 'falana', firstFrame=1000, lastFrame=1500)
+    gImgRawStack, numFrames = readFromImageGenerator(reader, 
+						  outputPath=outputPath, firstFrame=firstFrame,
+						  lastFrame=lastFrame)
     
+		
+    return gImgRawStack, row, col, numFrames
 
-    
-readAvi(input_dir, output_dir)
+def readPngSequence(inputPath, outputPath=None, firstFrame=0, lastFrame=np.inf)
+	
+	# TODO: check input and output paths	
+	pngFiles = [f for f in os.listdir(inputPath) if f.endswith('png')]
+	pngFiles.sort(key=lambda x: x.split('.')[0])
+	## generator expression for images to avoid memory overload
+	pngImages = (imageio.imread(join(inputPath,f)) for f in pngFiles)
+	row, col = pngImages[0].shape
+	
+	gImgRawStack, numFrames = readFromImageGenerator(pngImages, 
+						  outputPath=outputPath, firstFrame=firstFrame,
+						  lastFrame=lastFrame)
+		
+	return gImgRawStack, row, col, numFrames
 
-#~ l = ['paht', 'outoutpathj']
-#~ d =  {'fist_frame': 4, 'last_frame': 5}
 
-#~ readavi(*l, **d}
+
+
+
+
+
