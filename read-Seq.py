@@ -5,7 +5,7 @@ import numpy as np
 from os.path import join, exists
 
 path = r'Z:\Geeta-Share\DiffFileFormats\seq'
-outputDir = join(path, 'output-png')
+outputDir = join(r'Z:\Geeta-Share\DiffFileFormats', 'Output-Png')
 
 for subpath, dirs, files in list(os.walk(path)):
     output_subpath = subpath.replace(path, outputDir)
@@ -17,7 +17,7 @@ for subpath, dirs, files in list(os.walk(path)):
         for fname in files:
             input_fname = join(subpath, fname)
             ## make a folder corresponding to every input seq file
-            this_foldername = join(output_subpath, fname.replace('.seq', '')
+            this_foldername = join(output_subpath, fname.replace('.seq', ''))
             if not exists(this_foldername):
                 os.mkdir(this_foldername)
             vid = pims.open(input_fname)
