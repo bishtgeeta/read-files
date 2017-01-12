@@ -5,7 +5,7 @@ import numpy as np
 from os.path import join, exists
 
 path = r'F:\Python\EMImagingMPI-master'
-outputDir = join('path', 'output-tif')
+outputDir = join(path, 'output-tif')
 
 for subpath, dirs, files in list(os.walk(path)):
     output_subpath = subpath.replace(path, outputDir)
@@ -23,7 +23,7 @@ for subpath, dirs, files in list(os.walk(path)):
             vid = pims.open(input_fname)
             ## need to find how many frames are there in vid
             ## when you print dir(vid), you can see an attribute called `_image_count`
-            num_frames = vid._image_count
+            num_frames = vid._read_metadata
             for n in range(num_frames):
                 img = vid.get_frame(n)
                 img = ((img - img.min()) * 1.0 /  (img.max() - img.min()) * 255).astype(np.uint8)
