@@ -16,13 +16,10 @@ for subpath, dirs, files in list(os.walk(path)):
     if len(files) > 0:
         for fname in files:
             input_fname = join(subpath, fname)
-            ## make a folder corresponding to every input seq file
             this_foldername = join(output_subpath, fname.replace('.seq', ''))
             if not exists(this_foldername):
                 os.mkdir(this_foldername)
             vid = pims.open(input_fname)
-            ## need to find how many frames are there in vid
-            ## when you print dir(vid), you can see an attribute called `_image_count`
             num_frames = vid._image_count
             for n in range(num_frames):
                 img = vid.get_frame(n)
