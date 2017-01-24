@@ -19,5 +19,6 @@ for subpath, dirs, files in list(os.walk(path)):
             output_fname = join(output_subpath, fname).replace('dm4', 'png')
             img = pims.Bioformats(input_fname)
             img_array = img.get_frame(0)
+            img_array = img_array.astype(int)
             img_array = ((img_array - img_array.min()) * 1.0 /  (img_array.max() - img_array.min()) * 255).astype(np.uint8)
             cv2.imwrite(output_fname, img_array)
