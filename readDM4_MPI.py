@@ -16,39 +16,25 @@ rank = comm.Get_rank()
 #######################################################################
 
 pathList = [
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\001',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\003',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\006',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\007',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\012',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\019',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\021',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\022',
-#r'Z:\Geeta-Share\cubes assembly\20160614\one view\023'
-#r'Z:\ShuFen-Share\20170217 assembly\003',
-#r'Z:\ShuFen-Share\20170217 assembly\006',
-#r'Z:\ShuFen-Share\20170228\006',
-#r'Z:\ShuFen-Share\20170228\009',
-r'Z:\ShuFen-Share\20170217\021',
-r'Z:\ShuFen-Share\20170217\022'
+r'Y:\shufen\overgrowth\20170106 overgrowth Pd\017',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\002',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\003',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\004',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\005',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\006',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\007',
+#r'Z:\ShuFen-Share\20170720\AuCu NW\008',
 ]
 outputDirList = [
-#r'Z:\Geeta-Share\cubes assembly\20160614-001-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-003-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-006-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-007-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-012-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-019-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-021-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-022-output',
-#r'Z:\Geeta-Share\cubes assembly\20160614-023-output'
-#r'Z:\Geeta-Share\rod assembly\20170228-006-output',
-#r'Z:\Geeta-Share\rod assembly\20170228-009-output',
-r'Z:\Geeta-Share\bipyramid assembly\20170217-021-output',
-r'Z:\Geeta-Share\bipyramid assembly\20170217-022-output'
+r'Z:\Geeta-Share\Overgrowth\High Temperature\20170106-017',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\002',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\003',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\004',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\005',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\006',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\007',
+#r'Z:\Geeta-Share\For Shufen\20170720\AuCu NW\008',
 ]
-
-
 
 for path,outputDir in zip(pathList,outputDirList):
     if (rank==0):
